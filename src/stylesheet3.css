@@ -1,0 +1,34 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+table, th, td {
+    border: none;
+    outline: none;
+    border-collapse: collapse;
+   
+
+  }
+  th{
+      height: 33px;
+      background-color: #303960;
+      color: white;
+      border: none;
+      font-family: Georgia, 'Times New Roman', Times, serif;
+      font-size: 14px;
+      
+     
+  }
+  tr {
+    background-color: #ffffdd;
+  }
+  td{
+      height: 33px;
+      font-family: 'Lato', sans-serif;
+  }
+  table{
+    margin-left: 3%;
+    width: 100%;
+  }
+  .modules{
+    background-color: lightblue;
+    font-weight: bold;
+  }

@@ -1,0 +1,15 @@
+
+.rbc-toolbar{
+    background-color: #303960;
+    color: white;
+    font-weight: bold;
+    height: 20% ;
+    Font-family: monospace ; 
+}
+.rbc-btn-group button {
+    font-weight: bold;
+    background-color: #bbe1fa !important;
+}
+.rbc-month-header{
+color: #035aa6;
+}
