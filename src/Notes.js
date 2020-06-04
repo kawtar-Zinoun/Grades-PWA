@@ -17,27 +17,29 @@ import Menu from './WelcomePageX'
             NotesModule2: [],
             NotesModule3: [],
             NotesModule4: [],
-            isLoaded: false,
+            NotesF: [],
+            Matieres: [],
           }
           this.SendToAPI();
           this.callApi();
           
       }
       notes;
-      NotesG = [];
      async callApi(){
-      await fetch("https://4b4a431b8533.ngrok.io/testAPI")
+      await fetch("https://36925ce0f4d6.ngrok.io/testAPI")
       .then(res => res.json())
        .then(res => this.notes = res)
          .catch(err => err);
-       console.log(this.notes);
          await  this.getNotes();
-    
+         this.checkRatt();
+         this.checkRattMatieres();
+         console.log(this.notes);
      }
+
     
     async SendToAPI() {
       try{
-       fetch('https://4b4a431b8533.ngrok.io/testAPI', {
+       fetch('https://36925ce0f4d6.ngrok.io/testAPI', {
           method: 'POST',
           headers: {
             'Accept': 'application/json',
@@ -50,7 +52,12 @@ import Menu from './WelcomePageX'
     }
     catch(e) {console.log(e)}
     };
+    currentRatt = [];
+    UserRattMatieres = [];
     async getNotes() {
+      await this.notes.Modules.forEach(note => {
+        this.setState({Matieres : [...this.state.Matieres, note] })
+       });
       await this.notes.NotesGenerales.forEach(note => {
        this.setState({Notes : [...this.state.Notes, note] })
       });
@@ -66,11 +73,41 @@ import Menu from './WelcomePageX'
       await this.notes.notesModule4.forEach(note => {
   this.setState({NotesModule4 : [...this.state.NotesModule4, note] })
 });
+      await this.notes.notesF.forEach(note => {
+  this.setState({NotesF : [...this.state.NotesF, note] })
+     
+});
+//await localStorage.setItem('NOTES',this.state.NotesF);
   }
-
+     checkRatt(){ 
+       var i = 1;
+      this.state.NotesF.forEach(note => {
+        if(note === "R"){
+          this.currentRatt.push("M" + i );
+          i++;
+        }
+        else { i++}
+      });
+      localStorage.setItem('UserRatt', this.currentRatt);
+    }
+   checkRattMatieres(){
+     const md = this.state.NotesModule1.concat(this.state.NotesModule2, this.state.NotesModule3, 
+      this.state.NotesModule4);
+       var self = this;
+       md.forEach(function getItem(note, index) {
+        if (parseInt(note) < 12)  {
+       self.UserRattMatieres.push(self.state.Matieres[index]);
+     
+        }
+       
+      });
+      localStorage.setItem('RattMatieres', JSON.stringify(this.UserRattMatieres));
+    
+  }
+    
+     // next thing is to loop through modules and take names 
 render() {
 
-let dataC = this.state.Notes;
     return(
        
         <MenuProvider MenuComponent={MenuContainer} direction = 'left' animation = 'slide' >
@@ -99,102 +136,102 @@ let dataC = this.state.Notes;
   <tr className = "modules">
     <td>M5</td>
     <td>{this.state.Notes[0]}</td>
-    <td style={{textAlign : 'center'}}>R</td>
+    <td style={{textAlign : 'center'}}>{this.state.NotesF[0]}</td>
   </tr>
  
   <tr>
-    <td>Méthodes Numériques Ecrit</td>
+    <td>{this.state.Matieres[0]}</td>
     <td>{this.state.NotesModule1[0]}</td>
     <td></td>
   </tr>
   <tr>
-    <td>Méthodes Numériques TP</td>
+    <td>{this.state.Matieres[1]}</td>
     <td>{this.state.NotesModule1[1]}</td>
      <td></td>
   </tr>
   <tr>
-    <td>Probabilités et statistiques</td>
+    <td>{this.state.Matieres[2]}</td>
     <td>{this.state.NotesModule1[2]}</td>
     <td></td>
   </tr>
   <tr className = "modules">
     <td>M6</td>
     <td>{this.state.Notes[1]}</td>
-    <td style={{textAlign : 'center'}} >V</td>
+    <td style={{textAlign : 'center'}} >{this.state.NotesF[1]}</td>
   </tr>
   <tr>
-    <td>Structures de données Ecrit</td>
+    <td>{this.state.Matieres[3]}</td>
     <td>{this.state.NotesModule2[0]}</td>
     <td></td>
   </tr>
   <tr>
-    <td>Structures de données TP</td>
+    <td>{this.state.Matieres[4]} </td>
     <td>{this.state.NotesModule2[1]}</td>
     <td></td>
   </tr>
 
   <tr>
-    <td>  Initiation Programmation objet Ecrit </td>
+    <td>  {this.state.Matieres[5]} </td>
     <td>{this.state.NotesModule2[2]}</td>
     <td></td>
   </tr>
   <tr>
-    <td>  Initiation Programmation objet TP </td>
+    <td>   {this.state.Matieres[6]} </td>
     <td>{this.state.NotesModule2[3]}</td>
     <td></td>
   </tr>
   <tr className = "modules">
     <td>M7</td>
     <td>{this.state.Notes[2]}</td>
-    <td style={{textAlign : 'center'}}>V</td>
+    <td style={{textAlign : 'center'}}>{this.state.NotesF[2]}</td>
   </tr>
   <tr>
-    <td>Programmation Web Ecrit</td>
+    <td> {this.state.Matieres[7]}</td>
     <td>{this.state.NotesModule3[0]}</td>
     <td></td>
   </tr>
   <tr>
-    <td>Programmation Web TP</td>
+    <td> {this.state.Matieres[8]}</td>
     <td>{this.state.NotesModule3[1]}</td>
     <td></td>
   </tr>
   <tr>
-    <td>Environnement dévelopement Web Ecrit</td>
+    <td> {this.state.Matieres[9]}</td>
     <td>{this.state.NotesModule3[2]}</td>
     <td></td>
   </tr>
   <tr>
-    <td>Environnement dévelopement Web TP</td>
+    <td> {this.state.Matieres[10]} </td>
     <td>{this.state.NotesModule3[3]}</td>
     <td></td>
   </tr>
   <tr>
-    <td>Initiation Réseaux Ecrit</td>
+    <td> {this.state.Matieres[11]}</td>
     <td>{this.state.NotesModule3[4]}</td>
     <td></td>
   </tr>
   <tr>
-    <td>Initiation Réseaux TP</td>
+    <td> {this.state.Matieres[12]} </td>
     <td>{this.state.NotesModule3[5]}</td>
     <td></td>
   </tr>
   <tr className = "modules">
     <td>M8</td>
     <td>{this.state.Notes[3]}</td>
-    <td style={{textAlign : 'center'}}>R</td>
+    <td style={{textAlign : 'center'}}>{this.state.NotesF[3]}</td>
   </tr>
   <tr>
-    <td>Systèmes d'information Ecrit</td>
+    <td> {this.state.Matieres[13]}</td>
     <td>{this.state.NotesModule4[0]}</td>
     <td></td>
   </tr>
   <tr>
-    <td>Bases de données Ecrit</td>
+    <td>{this.state.Matieres[14]}</td>
     <td>{this.state.NotesModule4[1]}</td>
     <td></td>
   </tr>
   <tr>
-    <td>Bases de données TP</td>
+    <td>{this.state.Matieres[15]}</td>
     <td>{this.state.NotesModule4[2]}</td>
     <td></td>
   </tr>

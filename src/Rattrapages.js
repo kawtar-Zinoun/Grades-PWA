@@ -7,37 +7,39 @@ import Menu from './WelcomePageX'
 import moment from 'moment'
 import 'moment/locale/fr'
 import { Calendar, momentLocalizer } from 'react-big-calendar'
+import {Modal, Button} from 'react-bootstrap';
 
 const localizer = momentLocalizer(moment)
-
 require('react-big-calendar/lib/css/react-big-calendar.css')
+
 export default class Rattrapages extends React.Component{
     
   constructor(props) {
     super(props);
     this.state= {
-        events :[]
-    }
+       // events : JSON.parse(localStorage.getItem("RattMatieres")),
+        events2: [{'title': 'event1', 'start': this.randomDate(new Date(2020,5,1), new Date(2020,5,1), 8, 14), 'end': new Date(2020,5,1),  'allDay': false },
+         {'title': 'event2', 'start': new Date(2020,5,3), 'end': new Date(2020,5,3), 'allDay': false }]    }
+         
   }
-  
-   gapi = window.gapi;
-   CLIENT_ID = '101542556843-nfrg10dedu2vbqgokt7836fihaa6ak1f.apps.googleusercontent.com';
-   DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"];
-   SCOPES = "https://www.googleapis.com/auth/calendar";
-   APIKEY = "AIzaSyAgXdYzICVoIdWPN2yUXY9oo1uQs1C6_V4";
-  async handleClientLoad() {
-    this.gapi.load('client:auth2', this.initClient);
+ randomDate(start, end, startHour, endHour) {
+    var date = new Date(+start + Math.random() * (end - start));
+    var hour = startHour + Math.random() * (endHour - startHour) | 0;
+    date.setHours(hour);
+    console.log(date);
+    return date;
+   
   }
-  async initClient() {
-   await this.gapi.client.init({
-      apiKey: this.APIKEY,
-      clientId: this.CLIENT_ID,
-      discoveryDocs: this.DISCOVERY_DOCS,
-      scope: this.SCOPES
-    })};
-    handleAuthClick(){
-        this.gapi.auth2.getAuthInstance().signIn();
-      }
+  addEvents() {
+    const arr = JSON.parse(localStorage.getItem("RattMatieres"));
+    arr.forEach(element => {
+      console.log(element);
+    });
+  }
+  ModalShow() {
+
+  }
+ 
   render(){
     const messages = {
         allDay: 'journée',
@@ -56,6 +58,22 @@ export default class Rattrapages extends React.Component{
       }
       return (
         <MenuProvider MenuComponent={MenuContainer} direction = 'left' animation = 'slide' >
+            <div>
+  <Modal.Dialog>
+  <Modal.Header closeButton>
+    <Modal.Title>Modal title</Modal.Title>
+  </Modal.Header>
+
+  <Modal.Body>
+    <p>Modal body text goes here.</p>
+  </Modal.Body>
+
+  <Modal.Footer>
+    <Button variant="secondary">Close</Button>
+    <Button variant="primary">Save changes</Button>
+  </Modal.Footer>
+</Modal.Dialog> 
+            </div> 
         <div id= "container">
            <div className= "header">
         <nav id = 'nav'> <img src="./logo.jpg" alt="logo" /> <div className="text">Est-Notes  </div>
@@ -68,17 +86,17 @@ export default class Rattrapages extends React.Component{
             <h2 className="header2"> Rattrapages </h2>
             <div>
     <Calendar
+    selectable = {true}
     messages = {messages}
       localizer={localizer}
-      events={this.state.events}
+      events= {this.state.events2}
        culture = 'fr'
-      startAccessor="start"
-      endAccessor="end"
       style={{ height: 400, width : '98%', backgroundColor: '#f9fcfb' }}
+      // onSelectEvent = {}
     />
   </div>
-            </div> 
 
+            </div>
             </MenuProvider> 
             
       );

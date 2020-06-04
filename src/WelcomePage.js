@@ -16,8 +16,8 @@ const  WelcomePage = () => {
        
         <MenuProvider MenuComponent={MenuContainer} direction = 'left' animation = 'slide' >
       <div id= "container">
-         <div class= "header">
-      <nav id = 'nav'> <img src="./logo.jpg" alt="logo" /> <div class="text">Est-Notes </div>
+         <div className= "header">
+      <nav id = 'nav'> <img src="./logo.jpg" alt="logo" /> <div className="text">Est-Notes </div>
       <div style = {{float: 'right' , marginTop:'-28px' }}>
       <Menu />
       </div>
