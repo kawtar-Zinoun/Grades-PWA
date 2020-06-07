@@ -18,21 +18,21 @@ export default class Rattrapages extends React.Component{
     super(props);
     this.state= {
       Matieres : JSON.parse(localStorage.getItem("RattMatieres")),
-      RattMatieres : [],
-       
+        Dates: [],
+        Lieux: [],
         apiState : "test",
-        events2: [{'title': 'event1', 'start': new Date(2020,5,1),'end': new Date(2020,5,1), 'allDay': false },
-         {'title': 'event2', 'start': new Date(2020,5,3), 'end': new Date(2020,5,3), 'allDay': false }]    }
-         this.SendToAPI();
-        this.callApi(); 
+        Currentevents: [{'title': 'event1', 'start': new Date(2020,5,1),'end': new Date(2020,5,1), 'allDay': false }]    }
+       this.SendToAPI();
+      this.callApi(); 
   }
 
   async callApi(){
     await fetch("https://68a7ecd1b4d5.ngrok.io/Ratt")
-    .then(res => res.text())
-     .then(res => this.setState({apiState : res}))
+    .then(res => res.json())
+     .then(res => this.setState({Dates : res.Dates, Lieux : res.Lieu}))
        .catch(err => err);
-     
+       await this.addEvents();
+  
    }
    async SendToAPI() {
     try{
@@ -49,14 +49,23 @@ export default class Rattrapages extends React.Component{
   }
   catch(e) {console.log(e)}
   };
-  addEvents() {
-   // to Add events depending on number of ratt
+ events = [];
+  async addEvents() {
+  var i= 0;
+   this.state.Matieres.forEach(element => {
+     this.events.push({title: "Rattrapage " + element + ", Salle: " + this.state.Lieux[i],  'start': new Date(this.state.Dates[i]),
+ 'end': new Date(this.state.Dates[i]), 'allDay': false });
+   this.setState({Currentevents : this.events})
+   i++;
+   });
+
   }
   ModalShow() {
 //Show modal each time an event is clicked
   }
  
   render(){
+
     const messages = {
         allDay: 'journée',
         previous: 'précédent',
@@ -92,13 +101,13 @@ export default class Rattrapages extends React.Component{
     selectable = {true}
     messages = {messages}
       localizer={localizer}
-      events= {this.state.events2}
+      events= {this.events}
        culture = 'fr'
       style={{ height: 400, width : '98%', backgroundColor: '#f9fcfb' }}
       // onSelectEvent = {}
     />
   </div>
-      <div>{this.state.apiState}</div>
+      
             </div>
             </MenuProvider> 
             

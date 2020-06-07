@@ -4,6 +4,8 @@ var bodyParser = require("body-parser");
 const { GoogleSpreadsheet }  = require("google-spreadsheet");
 const creds = require('./client_secret.json');
 var RattMatt = [];
+var Dates = [];
+var Lieu = [];
 router.use(bodyParser.urlencoded({ extended: false }));
 router.use(bodyParser.json());
 router.post('/', (request, response) => {
@@ -11,11 +13,11 @@ router.post('/', (request, response) => {
     RattMatt = request.body.RattMatt;
   }); 
 router.get("/", async function(req, res) {
-    res.send("Api is working");
+    Dates = []; Lieu = [];
     await accessSpreadsheet();
+    return(res.send({Dates : Dates, Lieu : Lieu }))
 });
-var Dates = [];
-var Lieu = [];
+
 async function accessSpreadsheet(){
     const doc = new GoogleSpreadsheet('1_ufnb5IW8n74F6RClbN2JmuHOxQ_Y-BlPH_Ub12d0A0');
     await doc.useServiceAccountAuth(creds);
