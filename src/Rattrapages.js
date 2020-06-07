@@ -17,27 +17,43 @@ export default class Rattrapages extends React.Component{
   constructor(props) {
     super(props);
     this.state= {
-       // events : JSON.parse(localStorage.getItem("RattMatieres")),
-        events2: [{'title': 'event1', 'start': this.randomDate(new Date(2020,5,1), new Date(2020,5,1), 8, 14), 'end': new Date(2020,5,1),  'allDay': false },
+      Matieres : JSON.parse(localStorage.getItem("RattMatieres")),
+      RattMatieres : [],
+       
+        apiState : "test",
+        events2: [{'title': 'event1', 'start': new Date(2020,5,1),'end': new Date(2020,5,1), 'allDay': false },
          {'title': 'event2', 'start': new Date(2020,5,3), 'end': new Date(2020,5,3), 'allDay': false }]    }
-         
+         this.SendToAPI();
+        this.callApi(); 
   }
- randomDate(start, end, startHour, endHour) {
-    var date = new Date(+start + Math.random() * (end - start));
-    var hour = startHour + Math.random() * (endHour - startHour) | 0;
-    date.setHours(hour);
-    console.log(date);
-    return date;
-   
+
+  async callApi(){
+    await fetch("https://68a7ecd1b4d5.ngrok.io/Ratt")
+    .then(res => res.text())
+     .then(res => this.setState({apiState : res}))
+       .catch(err => err);
+     
+   }
+   async SendToAPI() {
+    try{
+     fetch('https://68a7ecd1b4d5.ngrok.io/Ratt', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          RattMatt: this.state.Matieres,
+        })
+      })
   }
+  catch(e) {console.log(e)}
+  };
   addEvents() {
-    const arr = JSON.parse(localStorage.getItem("RattMatieres"));
-    arr.forEach(element => {
-      console.log(element);
-    });
+   // to Add events depending on number of ratt
   }
   ModalShow() {
-
+//Show modal each time an event is clicked
   }
  
   render(){
@@ -59,20 +75,7 @@ export default class Rattrapages extends React.Component{
       return (
         <MenuProvider MenuComponent={MenuContainer} direction = 'left' animation = 'slide' >
             <div>
-  <Modal.Dialog>
-  <Modal.Header closeButton>
-    <Modal.Title>Modal title</Modal.Title>
-  </Modal.Header>
-
-  <Modal.Body>
-    <p>Modal body text goes here.</p>
-  </Modal.Body>
-
-  <Modal.Footer>
-    <Button variant="secondary">Close</Button>
-    <Button variant="primary">Save changes</Button>
-  </Modal.Footer>
-</Modal.Dialog> 
+  
             </div> 
         <div id= "container">
            <div className= "header">
@@ -95,7 +98,7 @@ export default class Rattrapages extends React.Component{
       // onSelectEvent = {}
     />
   </div>
-
+      <div>{this.state.apiState}</div>
             </div>
             </MenuProvider> 
             
