@@ -1,13 +1,14 @@
 import React from 'react';
-import './stylesheet1.css'
-import './Ratt.css'
 import MenuProvider from 'react-flexible-sliding-menu';
 import MenuContainer from './MenuContainer'
 import Menu from './WelcomePageX'
 import moment from 'moment'
 import 'moment/locale/fr'
 import { Calendar, momentLocalizer } from 'react-big-calendar'
+import 'bootstrap/dist/css/bootstrap.css'
 import {Modal, Button} from 'react-bootstrap';
+import './stylesheet1.css'
+import './Ratt.css'
 
 const localizer = momentLocalizer(moment)
 require('react-big-calendar/lib/css/react-big-calendar.css')
@@ -20,12 +21,14 @@ export default class Rattrapages extends React.Component{
       Matieres : JSON.parse(localStorage.getItem("RattMatieres")),
         Dates: [],
         Lieux: [],
-        apiState : "test",
+        showModal : false,
+        ClickedEvent : "",
         Currentevents: [{'title': 'event1', 'start': new Date(2020,5,1),'end': new Date(2020,5,1), 'allDay': false }]    }
        this.SendToAPI();
       this.callApi(); 
   }
-
+  showModal = (Event) => {this.setState({showModal: true, ClickedEvent : Event })};
+  hideModal = () => {this.setState({showModal: false})};
   async callApi(){
     await fetch("https://68a7ecd1b4d5.ngrok.io/Ratt")
     .then(res => res.json())
@@ -103,11 +106,27 @@ export default class Rattrapages extends React.Component{
       localizer={localizer}
       events= {this.events}
        culture = 'fr'
-      style={{ height: 400, width : '98%', backgroundColor: '#f9fcfb' }}
-      // onSelectEvent = {}
+      style={{ height: 500, width : '98%', backgroundColor: '#f9fcfb' }}
+     onSelectEvent = {event => this.showModal(event.title)}
     />
   </div>
-      
+   <div> 
+
+      <Modal show={this.state.showModal} onHide={this.hideModal}>
+        <Modal.Header closeButton>
+          <Modal.Title>Alerte</Modal.Title>
+        </Modal.Header>
+      <Modal.Body> Vous avez un {this.state.ClickedEvent},  Serait vous présent(e)? 
+   <div style= {{color: '#d92027', fontWeight : 'bold'}}> (veuillez marquer votre presence pour pouvoir assiter au rattrapage) </div> </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" style= {{width: '40%'}} onClick={this.hideModal}>
+            Fermer
+          </Button>
+          <Button variant="primary" style= {{width: '40%'}} onClick={this.hideModal}>
+            Marquer votre presence
+          </Button>
+        </Modal.Footer>
+      </Modal></div>
             </div>
             </MenuProvider> 
             

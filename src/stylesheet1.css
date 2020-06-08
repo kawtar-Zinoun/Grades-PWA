@@ -3,7 +3,7 @@
  body {
      margin: 0;
     height: 100%;
-    background-color: #dddddd;
+    background-color: #dddddd !important; 
     background-repeat: repeat;
     background-attachment: fixed;
     background-position: center;
@@ -15,18 +15,18 @@
 
 #container {
     flex:1;
-    justify-content: center;
+    justify-content: center  !important;
     align-items: center;
 
 }
 
 .header2{
-    margin-left:60%;
+    margin-left:60% ;
     color:#27496d;
 
-    font-family: 'Anton', sans-serif;
+    font-family: 'Anton', sans-serif  !important;
     border-bottom: 3px solid black;
-padding-bottom: 5px;
+padding-bottom: 5px  !important;
 
 }
 #nav{
