@@ -1,3 +1,4 @@
+import 'bootstrap/dist/css/bootstrap.css';
 import React from 'react';
 import GoogleLogin from 'react-google-login'
 import './stylesheet1.css';
@@ -47,15 +48,15 @@ render() {
   
     return (
       <div id="container">
-         <div class= "header">
+         <div class= "my-header">
       <nav id = 'nav'> <img src="./logo.jpg" alt="logo" /> <div class="text">Est-Notes </div>
        
        </nav>
      
           </div>
-      <h2 className="header2"> Connexion </h2>
+      <h2 className="my-header2"> Connexion </h2>
   
-      <div className="form">
+      <div className="my-form">
         <span className= "textx">Connectez vous avec votre compte academique pour acceder 
           à Est-Notes.</span>
       
@@ -63,7 +64,7 @@ render() {
      <div className="GoogleLog">  
       
       <GoogleLogin 
-      className="btn"
+      className="my-btn"
     clientId="163359188878-hqpdvnamdh38a3gkhhq6jnl1rbmedcms.apps.googleusercontent.com" 
     scope= 'profile email'
     ux_mode=  'redirect'

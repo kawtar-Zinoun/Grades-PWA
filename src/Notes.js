@@ -112,7 +112,7 @@ render() {
        
         <MenuProvider MenuComponent={MenuContainer} direction = 'left' animation = 'slide' >
         <div id= "container">
-           <div className= "header">
+           <div className= "my-header">
         <nav id = 'nav'> <img src="./logo.jpg" alt="logo" /> <div className="text">Est-Notes  </div>
         <div style = {{float: 'right' , marginTop:'-28px' }}>
         <Menu /> 
@@ -120,7 +120,7 @@ render() {
          </nav>
                
             </div>
-            <h2 className="header2"> Notes </h2>
+            <h2 className="my-header2"> Notes </h2>
            
             <div className= "mytable"> 
             <table style={{width:'95%'}}>

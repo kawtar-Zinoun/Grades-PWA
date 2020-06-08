@@ -20,12 +20,12 @@
 
 }
 
-.header2{
-    margin-left:60% ;
+.my-header2{
+    margin-left:60% !important;
     color:#27496d;
-
+     font-size: 25px;
     font-family: 'Anton', sans-serif  !important;
-    border-bottom: 3px solid black;
+    border-bottom: 3px solid black !important;
 padding-bottom: 5px  !important;
 
 }
@@ -53,7 +53,7 @@ padding-bottom: 5px  !important;
     width:50px;
    height: 40px;
 }
-.form{
+.my-form{
     
     padding: 30px 25px 15px 25px;
     background-color: #ffffff;
@@ -89,7 +89,7 @@ footer{
     text-align: center;
    
 }
-.btn {
+.my-btn {
     margin-top: 70px;
      height: 55px;
     width: 95%;

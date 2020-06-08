@@ -1,3 +1,4 @@
+
 import React from 'react';
 import MenuProvider from 'react-flexible-sliding-menu';
 import MenuContainer from './MenuContainer'
@@ -5,7 +6,6 @@ import Menu from './WelcomePageX'
 import moment from 'moment'
 import 'moment/locale/fr'
 import { Calendar, momentLocalizer } from 'react-big-calendar'
-import 'bootstrap/dist/css/bootstrap.css'
 import {Modal, Button} from 'react-bootstrap';
 import './stylesheet1.css'
 import './Ratt.css'
@@ -90,7 +90,7 @@ export default class Rattrapages extends React.Component{
   
             </div> 
         <div id= "container">
-           <div className= "header">
+           <div className= "my-header">
         <nav id = 'nav'> <img src="./logo.jpg" alt="logo" /> <div className="text">Est-Notes  </div>
         <div style = {{float: 'right' , marginTop:'-28px' }}>
         <Menu /> 
@@ -98,7 +98,7 @@ export default class Rattrapages extends React.Component{
          </nav>
                
             </div>
-            <h2 className="header2"> Rattrapages </h2>
+            <h2 className="my-header2"> Rattrapages </h2>
             <div>
     <Calendar
     selectable = {true}
@@ -106,7 +106,7 @@ export default class Rattrapages extends React.Component{
       localizer={localizer}
       events= {this.events}
        culture = 'fr'
-      style={{ height: 500, width : '98%', backgroundColor: '#f9fcfb' }}
+      style={{ height: 450, width : '98%', backgroundColor: '#f9fcfb' }}
      onSelectEvent = {event => this.showModal(event.title)}
     />
   </div>

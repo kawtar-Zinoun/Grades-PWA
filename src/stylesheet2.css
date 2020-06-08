@@ -101,13 +101,16 @@
     margin-top: -95px;
     margin-left: 60px;
   }
-  h2{
+  .myh2{
       text-align: center;
-    font-family: 'Courier New', Courier, monospace;
-    color: #ea6227;
+    font-family: 'Courier New', Courier, monospace !important;
+    font-weight: bold;
+    font-size: 30px;
+    color: #9a1f40;
 
   }
   .cardx {
+    text-align: center;
     background-color:#6886c5;
     margin-top: 5%;
     margin-bottom: 5%;
@@ -115,13 +118,13 @@
     display:inline-block;
     cursor:pointer;
     color:white;
-    font-family:Verdana;
-    font-size:15px;
-    font-weight:bold;
-    padding:9px 68px;
+    font-family:Verdana !important;
+    font-size:13px !important;
+    font-weight:bold !important;
+    padding:9px 68px !important;
     text-decoration:none;
 
-    box-shadow: 0  17px 10px -10px rgba(0, 0, 0, 0.4)
+    box-shadow: 0  17px 10px -10px rgba(0, 0, 0, 0.4);
    
   }
   .card:hover {
@@ -139,7 +142,7 @@
     cursor:pointer;
     color:white;
     font-family:Verdana;
-    font-size:15px;
+    font-size:14px;
     font-weight:bold;
     padding:9px 74px;
     text-decoration:none;

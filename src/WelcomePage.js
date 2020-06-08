@@ -30,8 +30,8 @@ const  WelcomePage = () => {
          backgroundPosition: 'center',
          backgroundSize: 'cover',
          backgroundRepeat: 'no-repeat'}}  className= "theBefore"></div> 
-    <h2> Bienvenue </h2>
-    <h2 style = {{color: '#0f4c75'}}>{user} </h2>
+    <h2 className= "myh2"> Bienvenue </h2>
+    <h2 className= "myh2" style = {{color: '#0f4c75'}}>{user} </h2>
     
         <button className= "cardx"> Voir les Notes </button>
         <button className= "card2"> Rattrapages </button>
