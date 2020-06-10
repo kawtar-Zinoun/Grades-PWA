@@ -1,10 +1,13 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { MenuContext } from "react-flexible-sliding-menu";
 import { NavLink } from "react-router-dom";
-import './stylesheet2.css'
 import { HomeSVG, DashboardSVG} from "./svgs";
+import { GoogleLogout } from 'react-google-login';
+import './stylesheet2.css'
+
 function MenuContainer() {
   const { closeMenu } = useContext(MenuContext);
+  const {signedIn, setSignedIn} = useState(true);
   return (
     <div className="Menu">
         <button onClick={closeMenu} >
@@ -34,9 +37,17 @@ function MenuContainer() {
         <DashboardSVG />
           <span>Rattrapages</span>
         </NavLink>
-        <NavLink to="Notes">
-        
-          <span>Se deconnecter</span>
+        <NavLink exact to="/">
+        <GoogleLogout
+      clientId="163359188878-hqpdvnamdh38a3gkhhq6jnl1rbmedcms.apps.googleusercontent.com"
+      className = "my-btn2"
+      ux_mode=  'redirect'
+      buttonText="Deconnexion"
+      onLogoutSuccess={() => setSignedIn(false)}
+      onFailure={ () => setSignedIn(true)}
+      theme= 'dark'
+    >
+    </GoogleLogout>
         </NavLink>
 
       </nav>

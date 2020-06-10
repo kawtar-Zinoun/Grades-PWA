@@ -109,6 +109,15 @@
     color: #9a1f40;
 
   }
+  .my-btn2{
+float: left;
+margin-right: 25%;
+
+  }
+  .my-btn2 div {
+    font-weight: bold;
+
+  }
   .cardx {
     text-align: center;
     background-color:#6886c5;
