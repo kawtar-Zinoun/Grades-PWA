@@ -22,8 +22,12 @@ router.get("/", async function(req, res) {
  notesGenerales = []; notesModule1 = []; notesModule2 = []; notesModule3= []; notesModule4 = []; noteF = []; 
  modules = [];
   await accessSpreadsheet();
-  return (res.send({NotesGenerales : notesGenerales, NotesModule1: notesModule1, notesModule2: notesModule2
-  , notesModule3: notesModule3, notesModule4: notesModule4, notesF: noteF, Modules : modules})); 
+  return (res.send({
+     NotesGenerales : notesGenerales, NotesModule1: notesModule1,
+   notesModule2: notesModule2
+  , notesModule3: notesModule3, notesModule4: notesModule4, notesF: noteF,
+   Modules : modules
+})); 
    
 });
 
@@ -35,8 +39,16 @@ async function accessSpreadsheet(){
   const rows = await sheet.getRows();
   rows.forEach( row => {
    getMail(row)
-  })
-  await ModuleNames(sheet)
+ })
+  await sheet.loadCells('H5:AD6'); 
+
+modules.push(sheet.getCellByA1("H6").value + " " + "Ecrit", sheet.getCellByA1("H6").value + " " + "TP",
+sheet.getCellByA1("J6").value, sheet.getCellByA1("M6").value + " " + "Ecrit", sheet.getCellByA1("M6").value + " " + "TP",
+sheet.getCellByA1("O6").value + " " + "Ecrit", sheet.getCellByA1("O6").value + " " + "TP", sheet.getCellByA1("S6").value + " " + "Ecrit",
+sheet.getCellByA1("S6").value + " " + "TP", sheet.getCellByA1("U6").value + " " + "Ecrit",sheet.getCellByA1("U6").value + " " + "TP", 
+sheet.getCellByA1("W6").value + " " + "Ecrit", sheet.getCellByA1("W6").value + " " + "TP",sheet.getCellByA1("AA6").value + " " + "Ecrit", 
+sheet.getCellByA1("AB6").value + " " + "Ecrit", sheet.getCellByA1("AB6").value + " " + "TP");
+
 }
 
  async function getMail(mails){
@@ -52,28 +64,17 @@ async function accessSpreadsheet(){
     noteF.push(mails.Moy1, mails.Moy2, mails.Moy3, mails.Moy4 );
   };
 }
-async function ModuleNames(sheet){
+/*async function ModuleNames(sheet){
   await sheet.loadCells(); 
-const matiere = sheet.getCellByA1("H6").value + " " + "Ecrit"; 
-const matiere1_2 = sheet.getCellByA1("H6").value + " " + "TP";
-const matiere2 = sheet.getCellByA1("J6").value ;
-const matiere3 = sheet.getCellByA1("M6").value + " " + "Ecrit";
-const matiere3_2 = sheet.getCellByA1("M6").value + " " + "TP";
-const matiere4 = sheet.getCellByA1("O6").value + " " + "Ecrit";
-const matiere4_2 = sheet.getCellByA1("O6").value + " " + "TP";
-const matiere5 = sheet.getCellByA1("S6").value + " " + "Ecrit";
-const matiere5_2 = sheet.getCellByA1("S6").value + " " + "TP";
-const matiere6 = sheet.getCellByA1("U6").value + " " + "Ecrit";
-const matiere6_2 = sheet.getCellByA1("U6").value + " " + "TP";
-const matiere7 = sheet.getCellByA1("W6").value + " " + "Ecrit";
-const matiere7_2 = sheet.getCellByA1("W6").value + " " + "TP";
-const matiere8 = sheet.getCellByA1("AA6").value + " " + "Ecrit";
-const matiere9 = sheet.getCellByA1("AB6").value + " " + "Ecrit";
-const matiere9_2 = sheet.getCellByA1("AB6").value + " " + "TP";
-modules.push(matiere, matiere1_2, matiere2, matiere3, matiere3_2, matiere4, matiere4_2, matiere5, matiere5_2,
-   matiere6, matiere6_2, matiere7, matiere7_2 ,matiere8, matiere9, matiere9_2);
 
-}
+modules.push(sheet.getCellByA1("H6").value + " " + "Ecrit", sheet.getCellByA1("H6").value + " " + "TP",
+sheet.getCellByA1("J6").value, sheet.getCellByA1("M6").value + " " + "Ecrit", sheet.getCellByA1("M6").value + " " + "TP",
+sheet.getCellByA1("O6").value + " " + "Ecrit", sheet.getCellByA1("O6").value + " " + "TP", sheet.getCellByA1("S6").value + " " + "Ecrit",
+sheet.getCellByA1("S6").value + " " + "TP", sheet.getCellByA1("U6").value + " " + "Ecrit",sheet.getCellByA1("U6").value + " " + "TP", 
+sheet.getCellByA1("W6").value + " " + "Ecrit", sheet.getCellByA1("W6").value + " " + "TP",sheet.getCellByA1("AA6").value + " " + "Ecrit", 
+sheet.getCellByA1("AB6").value + " " + "Ecrit", sheet.getCellByA1("AB6").value + " " + "TP");
+
+} */
 
 
 module.exports = router;

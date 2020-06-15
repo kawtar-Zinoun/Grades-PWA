@@ -19,27 +19,26 @@ import Menu from './WelcomePageX'
             NotesModule4: [],
             NotesF: [],
             Matieres: [],
+            fullyFetched: false,
           }
-          this.SendToAPI();
-          this.callApi();
           
       }
       notes;
      async callApi(){
-      await fetch("https://68a7ecd1b4d5.ngrok.io/testAPI")
+      await fetch("https://92c60c03474f.ngrok.io/testAPI")
       .then(res => res.json())
        .then(res => this.notes = res)
          .catch(err => err);
          await  this.getNotes();
-         this.checkRatt();
+          this.checkRatt();
          this.checkRattMatieres();
-         console.log(this.notes);
+         this.setState({fullyFetched: true});
      }
 
     
     async SendToAPI() {
       try{
-       fetch('https://68a7ecd1b4d5.ngrok.io/testAPI', {
+       fetch('https://92c60c03474f.ngrok.io/testAPI', {
           method: 'POST',
           headers: {
             'Accept': 'application/json',
@@ -104,8 +103,11 @@ import Menu from './WelcomePageX'
       localStorage.setItem('RattMatieres', JSON.stringify(this.UserRattMatieres));
     
   }
+  componentDidMount() {
+    this.SendToAPI();
+    this.callApi();
     
-     // next thing is to loop through modules and take names 
+}
 render() {
 
     return(
@@ -129,111 +131,110 @@ render() {
 
     <th>Module/Matière</th>
     <th style={{textAlign : 'left'}}>Note</th>
-    <th>Résultat</th>
+   
   </tr>
   </thead>
   <tbody>
-  <tr className = "modules">
+  <tr className = "modules" style = {{ backgroundColor: this.state.fullyFetched && this.state.NotesF[0] === "R" ? "#fd5e53" : "lightblue"}}> 
     <td>M5</td>
     <td>{this.state.Notes[0]}</td>
-    <td style={{textAlign : 'center'}}>{this.state.NotesF[0]}</td>
   </tr>
- 
+
   <tr>
     <td>{this.state.Matieres[0]}</td>
     <td>{this.state.NotesModule1[0]}</td>
-    <td></td>
+  
   </tr>
   <tr>
     <td>{this.state.Matieres[1]}</td>
     <td>{this.state.NotesModule1[1]}</td>
-     <td></td>
+    
   </tr>
   <tr>
     <td>{this.state.Matieres[2]}</td>
     <td>{this.state.NotesModule1[2]}</td>
-    <td></td>
+   
   </tr>
-  <tr className = "modules">
+  <tr className = "modules" style = {{ backgroundColor: this.state.fullyFetched && this.state.NotesF[1] === "R" ? "#fd5e53" : "lightblue"}}>
     <td>M6</td>
     <td>{this.state.Notes[1]}</td>
-    <td style={{textAlign : 'center'}} >{this.state.NotesF[1]}</td>
+    
   </tr>
   <tr>
     <td>{this.state.Matieres[3]}</td>
     <td>{this.state.NotesModule2[0]}</td>
-    <td></td>
+   
   </tr>
   <tr>
     <td>{this.state.Matieres[4]} </td>
     <td>{this.state.NotesModule2[1]}</td>
-    <td></td>
+  
   </tr>
 
   <tr>
     <td>  {this.state.Matieres[5]} </td>
     <td>{this.state.NotesModule2[2]}</td>
-    <td></td>
+    
   </tr>
   <tr>
     <td>   {this.state.Matieres[6]} </td>
     <td>{this.state.NotesModule2[3]}</td>
-    <td></td>
+ 
   </tr>
-  <tr className = "modules">
+  <tr className = "modules" style = {{ backgroundColor: this.state.fullyFetched && this.state.NotesF[2] === "R" ? "#fd5e53" : "lightblue"}}>
     <td>M7</td>
     <td>{this.state.Notes[2]}</td>
-    <td style={{textAlign : 'center'}}>{this.state.NotesF[2]}</td>
+    
   </tr>
   <tr>
     <td> {this.state.Matieres[7]}</td>
     <td>{this.state.NotesModule3[0]}</td>
-    <td></td>
+   
   </tr>
   <tr>
     <td> {this.state.Matieres[8]}</td>
     <td>{this.state.NotesModule3[1]}</td>
-    <td></td>
+
   </tr>
   <tr>
     <td> {this.state.Matieres[9]}</td>
     <td>{this.state.NotesModule3[2]}</td>
-    <td></td>
+  
   </tr>
   <tr>
     <td> {this.state.Matieres[10]} </td>
     <td>{this.state.NotesModule3[3]}</td>
-    <td></td>
+ 
   </tr>
   <tr>
     <td> {this.state.Matieres[11]}</td>
     <td>{this.state.NotesModule3[4]}</td>
-    <td></td>
+   
   </tr>
   <tr>
     <td> {this.state.Matieres[12]} </td>
     <td>{this.state.NotesModule3[5]}</td>
-    <td></td>
+   
   </tr>
-  <tr className = "modules">
+  <tr className = "modules" style = {{ backgroundColor: this.state.fullyFetched && this.state.NotesF[3] === "R" ? "#fd5e53" : "lightblue"}}>
     <td>M8</td>
     <td>{this.state.Notes[3]}</td>
-    <td style={{textAlign : 'center'}}>{this.state.NotesF[3]}</td>
+   
   </tr>
   <tr>
     <td> {this.state.Matieres[13]}</td>
     <td>{this.state.NotesModule4[0]}</td>
-    <td></td>
+  
   </tr>
   <tr>
     <td>{this.state.Matieres[14]}</td>
     <td>{this.state.NotesModule4[1]}</td>
-    <td></td>
+  
   </tr>
   <tr>
     <td>{this.state.Matieres[15]}</td>
     <td>{this.state.NotesModule4[2]}</td>
-    <td></td>
+ 
   </tr>
   </tbody>
 </table>

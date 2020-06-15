@@ -30,7 +30,7 @@ export default class Rattrapages extends React.Component{
   showModal = (Event) => {this.setState({showModal: true, ClickedEvent : Event })};
   hideModal = () => {this.setState({showModal: false})};
   async callApi(){
-    await fetch("https://68a7ecd1b4d5.ngrok.io/Ratt")
+    await fetch("https://92c60c03474f.ngrok.io/Ratt")
     .then(res => res.json())
      .then(res => this.setState({Dates : res.Dates, Lieux : res.Lieu}))
        .catch(err => err);
@@ -39,7 +39,7 @@ export default class Rattrapages extends React.Component{
    }
    async SendToAPI() {
     try{
-     fetch('https://68a7ecd1b4d5.ngrok.io/Ratt', {
+     fetch('https://92c60c03474f.ngrok.io/Ratt', {
         method: 'POST',
         headers: {
           'Accept': 'application/json',
@@ -63,9 +63,7 @@ export default class Rattrapages extends React.Component{
    });
 
   }
-  ModalShow() {
-//Show modal each time an event is clicked
-  }
+    
  
   render(){
 
@@ -117,13 +115,13 @@ export default class Rattrapages extends React.Component{
           <Modal.Title>Alerte</Modal.Title>
         </Modal.Header>
       <Modal.Body> Vous avez un {this.state.ClickedEvent},  Serait vous présent(e)? 
-   <div style= {{color: '#d92027', fontWeight : 'bold'}}> (veuillez marquer votre presence pour pouvoir assiter au rattrapage) </div> </Modal.Body>
+   <div style= {{color: '#d92027', fontWeight : 'bold'}}> Veuillez nous informer si vous seriez absent(e) </div> </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" style= {{width: '40%'}} onClick={this.hideModal}>
             Fermer
           </Button>
           <Button variant="primary" style= {{width: '40%'}} onClick={this.hideModal}>
-            Marquer votre presence
+            Je serais absent(e)
           </Button>
         </Modal.Footer>
       </Modal></div>
