@@ -42,12 +42,12 @@ async function accessSpreadsheet(){
  })
   await sheet.loadCells('H5:AD6'); 
 
-modules.push(sheet.getCellByA1("H6").value + " " + "Ecrit", sheet.getCellByA1("H6").value + " " + "TP",
-sheet.getCellByA1("J6").value, sheet.getCellByA1("M6").value + " " + "Ecrit", sheet.getCellByA1("M6").value + " " + "TP",
-sheet.getCellByA1("O6").value + " " + "Ecrit", sheet.getCellByA1("O6").value + " " + "TP", sheet.getCellByA1("S6").value + " " + "Ecrit",
-sheet.getCellByA1("S6").value + " " + "TP", sheet.getCellByA1("U6").value + " " + "Ecrit",sheet.getCellByA1("U6").value + " " + "TP", 
-sheet.getCellByA1("W6").value + " " + "Ecrit", sheet.getCellByA1("W6").value + " " + "TP",sheet.getCellByA1("AA6").value + " " + "Ecrit", 
-sheet.getCellByA1("AB6").value + " " + "Ecrit", sheet.getCellByA1("AB6").value + " " + "TP");
+modules.push("M5.1-" + sheet.getCellByA1("H6").value + " " + "Ecrit", "M5.1-" + sheet.getCellByA1("H6").value + " " + "TP",
+"M5.2-" + sheet.getCellByA1("J6").value, "M6.1-" + sheet.getCellByA1("M6").value + " " + "Ecrit", "M6.1-" + sheet.getCellByA1("M6").value + " " + "TP",
+"M6.2-" +sheet.getCellByA1("O6").value + " " + "Ecrit", "M6.2-" + sheet.getCellByA1("O6").value + " " + "TP", "M7.1-" + sheet.getCellByA1("S6").value + " " + "Ecrit",
+"M7.1-" +sheet.getCellByA1("S6").value + " " + "TP", "M7.2-" + sheet.getCellByA1("U6").value + " " + "Ecrit","M7.2-" + sheet.getCellByA1("U6").value + " " + "TP", 
+"M7.3-" + sheet.getCellByA1("W6").value + " " + "Ecrit", "M7.3-" + sheet.getCellByA1("W6").value + " " + "TP","M8.1-" + sheet.getCellByA1("AA6").value + " " + "Ecrit", 
+"M8.2-" + sheet.getCellByA1("AB6").value + " " + "Ecrit", "M8.2-" +sheet.getCellByA1("AB6").value + " " + "TP");
 
 }
 
@@ -61,7 +61,7 @@ sheet.getCellByA1("AB6").value + " " + "Ecrit", sheet.getCellByA1("AB6").value +
     notesModule3.push(mails.Moy_three_1,mails.Moy_three_2,mails.Moy_three_3,mails.Moy_three_4
       ,mails.Moy_three_5,mails.Moy_three_6);
     notesModule4.push(mails.Moy_four_1,mails.Moy_four_2,mails.Moy_four_3);
-    noteF.push(mails.Moy1, mails.Moy2, mails.Moy3, mails.Moy4 );
+    noteF.push(mails.Moy1.charAt(0), mails.Moy2.charAt(0), mails.Moy3.charAt(0), mails.Moy4.charAt(0));
   };
 }
 /*async function ModuleNames(sheet){

@@ -7,7 +7,7 @@ var cors = require("cors");
 var testAPIRouter = require("./routes/TestAPI");
 var Rattrapages = require("./routes/Ratt");
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+var AttendanceRouter = require('./routes/Attendance');
 
 var app = express();
 
@@ -23,7 +23,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/Attendance', AttendanceRouter);
 app.use("/TestAPI", testAPIRouter);
 app.use("/Ratt", Rattrapages);
 // catch 404 and forward to error handler

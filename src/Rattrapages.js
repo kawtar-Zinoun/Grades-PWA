@@ -18,6 +18,7 @@ export default class Rattrapages extends React.Component{
   constructor(props) {
     super(props);
     this.state= {
+      mes : '',
       Matieres : JSON.parse(localStorage.getItem("RattMatieres")),
         Dates: [],
         Lieux: [],
@@ -63,7 +64,31 @@ export default class Rattrapages extends React.Component{
    });
 
   }
+    async ValidateAttendance(event) {
+      try{
+        fetch('https://92c60c03474f.ngrok.io/Attendance', {
+           method: 'POST',
+           headers: {
+             'Accept': 'application/json',
+             'Content-Type': 'application/json',
+           },
+           body: JSON.stringify({
+             event: event,
+             user : localStorage.getItem("email"),
+           })
+         })
+     }
+     catch(e) {console.log(e)}
+    await this.getResponse();
+     };
+   async getResponse(){
+      await fetch("https://92c60c03474f.ngrok.io/Attendance")
+      .then(res => res.json())
+       .then(res => this.setState({mes : res.message}))
+         .catch(err => err);
+        console.log(this.state.mes);
     
+    }
  
   render(){
 
@@ -114,13 +139,13 @@ export default class Rattrapages extends React.Component{
         <Modal.Header closeButton>
           <Modal.Title>Alerte</Modal.Title>
         </Modal.Header>
-      <Modal.Body> Vous avez un {this.state.ClickedEvent},  Serait vous présent(e)? 
+      <Modal.Body> Vous avez un {this.state.ClickedEvent},  Serez vous présent(e)? 
    <div style= {{color: '#d92027', fontWeight : 'bold'}}> Veuillez nous informer si vous seriez absent(e) </div> </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" style= {{width: '40%'}} onClick={this.hideModal}>
             Fermer
           </Button>
-          <Button variant="primary" style= {{width: '40%'}} onClick={this.hideModal}>
+          <Button variant="primary" style= {{width: '40%'}} onClick={ () => this.ValidateAttendance(this.state.ClickedEvent)}>
             Je serais absent(e)
           </Button>
         </Modal.Footer>

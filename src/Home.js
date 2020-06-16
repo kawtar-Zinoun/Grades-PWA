@@ -48,8 +48,8 @@ render() {
   
     return (
       <div id="container">
-         <div class= "my-header">
-      <nav id = 'nav'> <img src="./logo.jpg" alt="logo" /> <div class="text">Est-Notes </div>
+         <div className= "my-header">
+      <nav id = 'nav'> <img src="./logo.jpg" alt="logo" /> <div className="text">Est-Notes </div>
        
        </nav>
      

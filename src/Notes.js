@@ -125,7 +125,7 @@ render() {
             <h2 className="my-header2"> Notes </h2>
            
             <div className= "mytable"> 
-            <table style={{width:'95%'}}>
+            <table style={{width:'95%', height: '90%'}}>
               <thead>
   <tr>
 
