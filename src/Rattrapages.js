@@ -18,11 +18,13 @@ export default class Rattrapages extends React.Component{
   constructor(props) {
     super(props);
     this.state= {
+       response : '',
       mes : '',
       Matieres : JSON.parse(localStorage.getItem("RattMatieres")),
         Dates: [],
         Lieux: [],
         showModal : false,
+        showModal2: false,
         ClickedEvent : "",
         Currentevents: [{'title': 'event1', 'start': new Date(2020,5,1),'end': new Date(2020,5,1), 'allDay': false }]    }
        this.SendToAPI();
@@ -30,8 +32,10 @@ export default class Rattrapages extends React.Component{
   }
   showModal = (Event) => {this.setState({showModal: true, ClickedEvent : Event })};
   hideModal = () => {this.setState({showModal: false})};
+  showModal2 = (Event) => {this.setState({showModal2: true, ClickedEvent : Event })};
+  hideModal2 = () => {this.setState({showModal2: false})};
   async callApi(){
-    await fetch("https://92c60c03474f.ngrok.io/Ratt")
+    await fetch(" https://d0b3356ce275.ngrok.io/Ratt")
     .then(res => res.json())
      .then(res => this.setState({Dates : res.Dates, Lieux : res.Lieu}))
        .catch(err => err);
@@ -40,7 +44,7 @@ export default class Rattrapages extends React.Component{
    }
    async SendToAPI() {
     try{
-     fetch('https://92c60c03474f.ngrok.io/Ratt', {
+     fetch(' https://d0b3356ce275.ngrok.io/Ratt', {
         method: 'POST',
         headers: {
           'Accept': 'application/json',
@@ -66,7 +70,7 @@ export default class Rattrapages extends React.Component{
   }
     async ValidateAttendance(event) {
       try{
-        fetch('https://92c60c03474f.ngrok.io/Attendance', {
+        fetch(' https://d0b3356ce275.ngrok.io/Attendance', {
            method: 'POST',
            headers: {
              'Accept': 'application/json',
@@ -82,12 +86,43 @@ export default class Rattrapages extends React.Component{
     await this.getResponse();
      };
    async getResponse(){
-      await fetch("https://92c60c03474f.ngrok.io/Attendance")
+      await fetch(" https://d0b3356ce275.ngrok.io/Attendance")
       .then(res => res.json())
        .then(res => this.setState({mes : res.message}))
          .catch(err => err);
-        console.log(this.state.mes);
-    
+         this.hideModal();
+    alert("enregistré avec succès!");
+    }
+    async CheckAttendace(event) {
+      try{
+        fetch(' https://d0b3356ce275.ngrok.io/Attendance_2', {
+           method: 'POST',
+           headers: {
+             'Accept': 'application/json',
+             'Content-Type': 'application/json',
+           },
+           body: JSON.stringify({
+             event: event,
+             user : localStorage.getItem("email"),
+           })
+         })
+     }
+     catch(e) {console.log(e)};
+      await fetch(" https://d0b3356ce275.ngrok.io/Attendance_2")
+      .then(res => res.json())
+       .then(res => this.setState({response : res.mystate}))
+         .catch(err => err);
+    if (this.state.response === "false") {
+      this.showModal2(event);
+      console.log(this.state.response)
+    }
+    else if(this.state.response === "true") {
+      this.showModal(event);
+      console.log(this.state.response)
+    }
+    else {
+      alert("Veuillez réessayer plus tard");
+    }
     }
  
   render(){
@@ -130,7 +165,7 @@ export default class Rattrapages extends React.Component{
       events= {this.events}
        culture = 'fr'
       style={{ height: 450, width : '98%', backgroundColor: '#f9fcfb' }}
-     onSelectEvent = {event => this.showModal(event.title)}
+     onSelectEvent = {event => this.CheckAttendace(event.title)}
     />
   </div>
    <div> 
@@ -148,6 +183,21 @@ export default class Rattrapages extends React.Component{
           <Button variant="primary" style= {{width: '40%'}} onClick={ () => this.ValidateAttendance(this.state.ClickedEvent)}>
             Je serais absent(e)
           </Button>
+        </Modal.Footer>
+      </Modal></div>
+      <div> 
+
+      <Modal show={this.state.showModal2} onHide={this.hideModal2}>
+        <Modal.Header closeButton>
+          <Modal.Title>Alerte</Modal.Title>
+        </Modal.Header>
+      <Modal.Body> Vous avez un {this.state.ClickedEvent}
+   <div style= {{color: '#d92027', fontWeight : 'bold'}}> Vous avez marqué que vous serez absent </div> </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" style= {{width: '40%'}} onClick={this.hideModal2}>
+            Fermer
+          </Button>
+       
         </Modal.Footer>
       </Modal></div>
             </div>

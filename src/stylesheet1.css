@@ -11,6 +11,8 @@
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+
+
 }
 
 #container {
@@ -76,18 +78,22 @@ padding-top: 4px  !important;
     float: left;
 
 }
-
+body::after {
+    content: '';
+    display: block;
+    height: 20px; /* Set same as footer's height */
+  }
+  
 footer{
     background-color: #333333;
-    max-height: 20px;
+    height: 20px;
     font-size: 0.8rem;
     color: white;
-    box-sizing: border-box;
-    left: 0;
-    bottom: 0;
     width: 100%;
+    bottom: 0;
+    position: fixed;
     text-align: center;
-   
+  
 }
 .my-btn {
     margin-top: 17%;

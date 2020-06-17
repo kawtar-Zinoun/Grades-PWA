@@ -19,6 +19,8 @@ router.post('/', (request, response) => {
  
 }); 
 router.get("/", async function(req, res) {
+  res.header('Access-Control-Allow-Origin', "https://e09987537d96.ngrok.io"); 
+  res.header('Access-Control-Allow-Methods','GET,POST,DELETE'); 
  notesGenerales = []; notesModule1 = []; notesModule2 = []; notesModule3= []; notesModule4 = []; noteF = []; 
  modules = [];
   await accessSpreadsheet();

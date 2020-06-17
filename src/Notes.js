@@ -25,7 +25,7 @@ import Menu from './WelcomePageX'
       }
       notes;
      async callApi(){
-      await fetch("https://92c60c03474f.ngrok.io/testAPI")
+      await fetch(" https://d0b3356ce275.ngrok.io/testAPI")
       .then(res => res.json())
        .then(res => this.notes = res)
          .catch(err => err);
@@ -38,7 +38,7 @@ import Menu from './WelcomePageX'
     
     async SendToAPI() {
       try{
-       fetch('https://92c60c03474f.ngrok.io/testAPI', {
+       fetch(' https://d0b3356ce275.ngrok.io/testAPI', {
           method: 'POST',
           headers: {
             'Accept': 'application/json',
