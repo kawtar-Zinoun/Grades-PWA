@@ -10,12 +10,14 @@ router.use(bodyParser.json());
 var event ;
 var user;
 var state = "";
-router.post('/', (request, response) => {
-  
+router.post('/', async (request, res) => {
+  res.send("received");
   event = request.body.event;
   user = request.body.user;
+  console.log(event);
 }); 
 router.get('/', async function(req, res, next) {
+  state = "";
   await accessSpreadsheet();
   res.send({ mystate: state});
 });
@@ -34,28 +36,29 @@ async function accessSpreadsheet(){
     
      if(event.indexOf("M5") !== -1) {
       
-       if(row.Moy1.indexOf(RattNum) != -1) { state = "false"  }
-       else {
+       if(row.Moy1.indexOf(RattNum) !== -1) { state = "false"  }
+       else if (row.Moy1.indexOf(RattNum) == -1){
        state = "true";
       }}
      else if(event.indexOf("M6") !== -1) {
       
         if(row.Moy2.indexOf(RattNum) != -1) { state = "false"  }
-        else {
+        else if (row.Moy2.indexOf(RattNum) != -1) {
         state = "true";
        } }
        else if(event.indexOf("M7") !== -1) {
       
         if(row.Moy3.indexOf(RattNum) != -1) { state = "false"  }
-        else {
+        else if (row.Moy3.indexOf(RattNum) != -1){
         state = "true";
        } }
        else if(event.indexOf("M8") !== -1) {
       
         if(row.Moy4.indexOf(RattNum) != -1) { state = "false"  }
-        else {
+        else if(row.Moy4.indexOf(RattNum) != -1){
         state = "true";
        } }
+       else {state = "error"}
      }}
  
 module.exports = router;

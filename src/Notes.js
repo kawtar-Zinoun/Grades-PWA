@@ -6,7 +6,7 @@ import MenuContainer from './MenuContainer'
 import Menu from './WelcomePageX'
 //import axios from 'axios';
  class Notes extends React.Component{
-  
+  serverN = "https://f3055e23a67a.ngrok.io/TestAPI"
     constructor(props) {
         super(props)
         this.state = {
@@ -25,7 +25,7 @@ import Menu from './WelcomePageX'
       }
       notes;
      async callApi(){
-      await fetch(" https://d0b3356ce275.ngrok.io/testAPI")
+      await fetch(this.serverN)
       .then(res => res.json())
        .then(res => this.notes = res)
          .catch(err => err);
@@ -38,7 +38,7 @@ import Menu from './WelcomePageX'
     
     async SendToAPI() {
       try{
-       fetch(' https://d0b3356ce275.ngrok.io/testAPI', {
+       fetch(this.serverN, {
           method: 'POST',
           headers: {
             'Accept': 'application/json',
@@ -115,8 +115,8 @@ render() {
         <MenuProvider MenuComponent={MenuContainer} direction = 'left' animation = 'slide' >
         <div id= "container">
            <div className= "my-header">
-        <nav id = 'nav'> <img src="./logo.jpg" alt="logo" /> <div className="text">Est-Notes  </div>
-        <div style = {{float: 'right' , marginTop:'-28px' }}>
+        <nav id = 'nav'> <img src="./logo_transparent.png" alt="logo" /> <div className="text">Est-Notes  </div>
+        <div style = {{float: 'right' , marginTop:'-11%'  }}>
         <Menu /> 
         </div> 
          </nav>

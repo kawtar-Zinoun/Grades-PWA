@@ -11,7 +11,7 @@ var event ;
 var user;
 var message = "";
 var state = "";
-router.post('/', (request, response) => {
+router.post('/', (request, res) => {
   event = request.body.event;
   user = request.body.user;
 }); 

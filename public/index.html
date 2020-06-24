@@ -2,8 +2,10 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon1.ico" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Est-Notes">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
     <meta
@@ -12,14 +14,35 @@
     />
     <!-- Tell the browser it's a PWA -->
 <meta name="mobile-web-app-capable" content="yes">
-<!-- Tell iOS it's a PWA -->
-<meta name="apple-mobile-web-app-capable" content="yes">
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo.jpg" />
+<link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+
+    <link rel="icon" href="%PUBLIC_URL%/favicon1.ico" />
+    <link rel="apple-touch-icon" sizes = "180x180"  href="facebook_profile_image.png">
+    <link href="splashscreens/iphone5_splash.png" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
+    <link href="splashscreens/iphone6_splash.png" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
+    <link href="splashscreens/iphoneplus_splash.png" media="(device-width: 621px) and (device-height: 1104px) and (-webkit-device-pixel-ratio: 3)" rel="apple-touch-startup-image" />
+    <link href="splashscreens/iphonex_splash.png" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3)" rel="apple-touch-startup-image" />
+    <link href="splashscreens/iphonexr_splash.png" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
+    <link href="splashscreens/iphonexsmax_splash.png" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3)" rel="apple-touch-startup-image" />
      <link href="src/stylesheet1.css" rel="stylesheet" type= "text/css"/>
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
     <script src='../src/index.js'></script>
     <title>Est-Notes</title>
-    
+    <script>
+      window.onresize = function(){ location.reload(); }
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker.register('./src/worker.js').then(function(registration) {
+            console.log('Worker registration successful', registration.scope);
+          }, function(err) {
+            console.log('Worker registration failed', err);
+          }).catch(function(err) {
+            console.log(err);
+          });
+        });
+      } else {
+        console.log('Service Worker is not supported by browser.');
+      }
+    </script>
   </head>
 
   <body>
@@ -30,22 +53,6 @@
     
     <footer><span>All Copyrights Reserved.</span></footer>
   </div>
- 
-  <script>
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', function() {
-        navigator.serviceWorker.register('../src/worker.js').then(function(registration) {
-          console.log('Worker registration successful', registration.scope);
-        }, function(err) {
-          console.log('Worker registration failed', err);
-        }).catch(function(err) {
-          console.log(err);
-        });
-      });
-    } else {
-      console.log('Service Worker is not supported by browser.');
-    }
-  </script>
-   
+
   </body>
 </html>

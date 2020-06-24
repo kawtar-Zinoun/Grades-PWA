@@ -3,7 +3,10 @@
  body {
      margin: 0;
     height: 100%;
-    background-color: #dddddd !important; 
+    background: #7F7FD5;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to bottom, #91EAE4, #86A8E7, #7F7FD5);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to bottom, #91EAE4, #86A8E7, #7F7FD5); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    
     background-repeat: repeat;
     background-attachment: fixed;
     background-position: center;
@@ -24,7 +27,7 @@
 
 .my-header2{
     margin-left:60% !important;
-    color:#27496d;
+    color:#3f3f44;
      font-size: 25px;
     font-family: 'Anton', sans-serif  !important;
     border-bottom: 3px solid black !important;
@@ -42,6 +45,10 @@ padding-top: 4px  !important;
    border-bottom: 1px solid white;
 
 }
+.GoogleLog{
+margin-top: 50%;
+
+}
 .text{
     color: white;
     margin-left: 11%;
@@ -53,19 +60,21 @@ padding-top: 4px  !important;
 }
 #nav img {
     float: left;
-    width:50px;
-   height: 40px;
+    margin-left:-7%;
+    width:53px;
+   height: 45px;
 }
 .my-form{
     
-    padding: 30px 25px 15px 25px;
+    padding: 15px 10px 10px 10px;
     background-color: #ffffff;
-    min-width: 260px;
-    height: 270px;
-    border-radius: 30px;
+    min-width: 95%;
+    min-height: 90px;
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
     position: absolute;
-    top: 60%;
-    left: 50.5%;
+    top: 200px;
+    left: 48%;
     transform: translate(-50%, -50%);
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     
@@ -95,10 +104,11 @@ footer{
     text-align: center;
   
 }
+
 .my-btn {
-    margin-top: 17%;
+   
      height: 55px;
-    width: 95%;
+    width: 80%;
     vertical-align: middle;
     text-align: center;
 }

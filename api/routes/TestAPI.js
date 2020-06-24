@@ -1,5 +1,6 @@
 var express = require("express");
 var router = express()
+var cors = require("cors");
 var bodyParser = require("body-parser");
 const { GoogleSpreadsheet }  = require("google-spreadsheet");
 const creds = require('./client_secret.json');
@@ -12,6 +13,7 @@ var notesModule3= [];
 var notesModule4 = [];
 var noteF = [];
 var email = '';
+router.use(cors());
 router.use(bodyParser.urlencoded({ extended: false }));
 router.use(bodyParser.json());
 router.post('/', (request, response) => {
@@ -19,8 +21,7 @@ router.post('/', (request, response) => {
  
 }); 
 router.get("/", async function(req, res) {
-  res.header('Access-Control-Allow-Origin', "https://e09987537d96.ngrok.io"); 
-  res.header('Access-Control-Allow-Methods','GET,POST,DELETE'); 
+
  notesGenerales = []; notesModule1 = []; notesModule2 = []; notesModule3= []; notesModule4 = []; noteF = []; 
  modules = [];
   await accessSpreadsheet();
@@ -63,7 +64,8 @@ modules.push("M5.1-" + sheet.getCellByA1("H6").value + " " + "Ecrit", "M5.1-" + 
     notesModule3.push(mails.Moy_three_1,mails.Moy_three_2,mails.Moy_three_3,mails.Moy_three_4
       ,mails.Moy_three_5,mails.Moy_three_6);
     notesModule4.push(mails.Moy_four_1,mails.Moy_four_2,mails.Moy_four_3);
-    noteF.push(mails.Moy1.charAt(0), mails.Moy2.charAt(0), mails.Moy3.charAt(0), mails.Moy4.charAt(0));
+    noteF.push(mails.Moy1.charAt(0), mails.Moy2.charAt(0), mails.Moy3.charAt(0), 
+    mails.Moy4.charAt(0));
   };
 }
 /*async function ModuleNames(sheet){

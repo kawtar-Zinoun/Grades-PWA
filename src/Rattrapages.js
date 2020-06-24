@@ -14,7 +14,9 @@ const localizer = momentLocalizer(moment)
 require('react-big-calendar/lib/css/react-big-calendar.css')
 
 export default class Rattrapages extends React.Component{
-    
+  serverN = "https://f3055e23a67a.ngrok.io/Ratt";
+serverN2 = "https://f3055e23a67a.ngrok.io/Attendance";
+serverN3 = "https://f3055e23a67a.ngrok.io/Attendance_2";  
   constructor(props) {
     super(props);
     this.state= {
@@ -35,7 +37,7 @@ export default class Rattrapages extends React.Component{
   showModal2 = (Event) => {this.setState({showModal2: true, ClickedEvent : Event })};
   hideModal2 = () => {this.setState({showModal2: false})};
   async callApi(){
-    await fetch(" https://d0b3356ce275.ngrok.io/Ratt")
+    await fetch(this.serverN)
     .then(res => res.json())
      .then(res => this.setState({Dates : res.Dates, Lieux : res.Lieu}))
        .catch(err => err);
@@ -44,7 +46,7 @@ export default class Rattrapages extends React.Component{
    }
    async SendToAPI() {
     try{
-     fetch(' https://d0b3356ce275.ngrok.io/Ratt', {
+     fetch(this.serverN, {
         method: 'POST',
         headers: {
           'Accept': 'application/json',
@@ -70,7 +72,7 @@ export default class Rattrapages extends React.Component{
   }
     async ValidateAttendance(event) {
       try{
-        fetch(' https://d0b3356ce275.ngrok.io/Attendance', {
+        fetch(this.serverN2, {
            method: 'POST',
            headers: {
              'Accept': 'application/json',
@@ -80,13 +82,13 @@ export default class Rattrapages extends React.Component{
              event: event,
              user : localStorage.getItem("email"),
            })
-         })
+         }).then(() => {console.log("done") } )
      }
      catch(e) {console.log(e)}
     await this.getResponse();
      };
    async getResponse(){
-      await fetch(" https://d0b3356ce275.ngrok.io/Attendance")
+      await fetch(this.serverN2)
       .then(res => res.json())
        .then(res => this.setState({mes : res.message}))
          .catch(err => err);
@@ -94,8 +96,10 @@ export default class Rattrapages extends React.Component{
     alert("enregistré avec succès!");
     }
     async CheckAttendace(event) {
+      console.log(event);
       try{
-        fetch(' https://d0b3356ce275.ngrok.io/Attendance_2', {
+      
+    await fetch(this.serverN3, {
            method: 'POST',
            headers: {
              'Accept': 'application/json',
@@ -104,26 +108,28 @@ export default class Rattrapages extends React.Component{
            body: JSON.stringify({
              event: event,
              user : localStorage.getItem("email"),
-           })
-         })
+           }) })
+         .then( () => {console.log("data sent") })
+         this.setState({ClickedEvent: event})
      }
      catch(e) {console.log(e)};
-      await fetch(" https://d0b3356ce275.ngrok.io/Attendance_2")
-      .then(res => res.json())
-       .then(res => this.setState({response : res.mystate}))
-         .catch(err => err);
-    if (this.state.response === "false") {
-      this.showModal2(event);
-      console.log(this.state.response)
-    }
-    else if(this.state.response === "true") {
-      this.showModal(event);
-      console.log(this.state.response)
-    }
-    else {
-      alert("Veuillez réessayer plus tard");
-    }
-    }
+      await fetch(this.serverN3)
+      .then(res =>res.json())
+       .then( res =>  this.setState({response : res.mystate}))
+         .catch(err => err) 
+         if (this.state.response === "false") {
+          this.showModal2(event);
+          console.log(this.state.response)
+          this.setState({response : ""}) }
+          else if(this.state.response === "true") {
+           this.showModal(event);
+            console.log(this.state.response)
+            this.setState({response : ""}) 
+          }
+          else {
+            alert("Veuillez réessayer plus tard");
+          }
+        } 
  
   render(){
 
@@ -149,8 +155,8 @@ export default class Rattrapages extends React.Component{
             </div> 
         <div id= "container">
            <div className= "my-header">
-        <nav id = 'nav'> <img src="./logo.jpg" alt="logo" /> <div className="text">Est-Notes  </div>
-        <div style = {{float: 'right' , marginTop:'-28px' }}>
+        <nav id = 'nav'> <img src="./logo_transparent.png" /> <div className="text">Est-Notes  </div>
+        <div style = {{float: 'right' , marginTop:'-11%' }}>
         <Menu /> 
         </div> 
          </nav>
@@ -165,7 +171,7 @@ export default class Rattrapages extends React.Component{
       events= {this.events}
        culture = 'fr'
       style={{ height: 450, width : '98%', backgroundColor: '#f9fcfb' }}
-     onSelectEvent = {event => this.CheckAttendace(event.title)}
+     onSelectEvent= {event => this.CheckAttendace(event.title)}
     />
   </div>
    <div> 
