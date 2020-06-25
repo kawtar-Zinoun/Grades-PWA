@@ -6,7 +6,7 @@ import MenuContainer from './MenuContainer'
 import Menu from './WelcomePageX'
 //import axios from 'axios';
  class Notes extends React.Component{
-  serverN = "https://f3055e23a67a.ngrok.io/TestAPI"
+  serverN = "https://b9fd04860fd8.ngrok.io/TestAPI"
     constructor(props) {
         super(props)
         this.state = {

@@ -14,9 +14,9 @@ const localizer = momentLocalizer(moment)
 require('react-big-calendar/lib/css/react-big-calendar.css')
 
 export default class Rattrapages extends React.Component{
-  serverN = "https://f3055e23a67a.ngrok.io/Ratt";
-serverN2 = "https://f3055e23a67a.ngrok.io/Attendance";
-serverN3 = "https://f3055e23a67a.ngrok.io/Attendance_2";  
+  serverN = "https://b9fd04860fd8.ngrok.io/Ratt";
+serverN2 = "https://b9fd04860fd8.ngrok.io/Attendance";
+serverN3 = "https://b9fd04860fd8.ngrok.io/Attendance_2";  
   constructor(props) {
     super(props);
     this.state= {
@@ -72,7 +72,7 @@ serverN3 = "https://f3055e23a67a.ngrok.io/Attendance_2";
   }
     async ValidateAttendance(event) {
       try{
-        fetch(this.serverN2, {
+       fetch(this.serverN2, {
            method: 'POST',
            headers: {
              'Accept': 'application/json',

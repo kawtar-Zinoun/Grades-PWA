@@ -43,19 +43,19 @@ async function accessSpreadsheet(){
      else if(event.indexOf("M6") !== -1) {
       
         if(row.Moy2.indexOf(RattNum) != -1) { state = "false"  }
-        else if (row.Moy2.indexOf(RattNum) != -1) {
+        else if (row.Moy2.indexOf(RattNum) == -1) {
         state = "true";
        } }
        else if(event.indexOf("M7") !== -1) {
       
         if(row.Moy3.indexOf(RattNum) != -1) { state = "false"  }
-        else if (row.Moy3.indexOf(RattNum) != -1){
+        else if (row.Moy3.indexOf(RattNum) == -1){
         state = "true";
        } }
        else if(event.indexOf("M8") !== -1) {
       
         if(row.Moy4.indexOf(RattNum) != -1) { state = "false"  }
-        else if(row.Moy4.indexOf(RattNum) != -1){
+        else if(row.Moy4.indexOf(RattNum) == -1){
         state = "true";
        } }
        else {state = "error"}
